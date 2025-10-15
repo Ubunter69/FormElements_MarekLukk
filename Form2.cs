@@ -12,12 +12,12 @@ namespace FormElements
 {
     public partial class Form2 : Form
     {
-        private PictureBox pictureBox;
-        private CheckBox chkOpacity, chkTopMost, chkMaximized, chkBorder;
-        private RadioButton rbDark, rbLight;
-        private TabControl tabControl;
-        private ListBox listBox;
-        private string[] images = { "esimene.jpg", "teine.jpg", "kolmas.jpg" };
+        private PictureBox pic;
+        private CheckBox cb1, cb2, cb3, cb4;
+        private RadioButton rb1, rb2;
+        private TabControl tabs;
+        private ListBox list;
+        private string[] images = { "esimene.jpg", "teine.jpg", "kolmas.jpg","close_box_red.png", "about.png" };
         private int currentImageIndex = 0;
         private Random random = new Random();
 
@@ -34,64 +34,64 @@ namespace FormElements
             this.Text = "Vorm elementidega";
 
             // PictureBox
-            pictureBox = new PictureBox();
-            pictureBox.Size = new Size(150, 150);
-            pictureBox.Location = new Point(30, 50);
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.Image = Image.FromFile(@"..\..\Images\" + images[0]);
-            pictureBox.DoubleClick += PictureBox_DoubleClick;
-            pictureBox.BorderStyle = BorderStyle.FixedSingle;
-            this.Controls.Add(pictureBox);
+            pic = new PictureBox();
+            pic.Size = new Size(150, 150);
+            pic.Location = new Point(30, 50);
+            pic.SizeMode = PictureBoxSizeMode.StretchImage;
+            pic.Image = Image.FromFile(@"..\..\Images\" + images[0]);
+            pic.DoubleClick += PicClick;
+            pic.BorderStyle = BorderStyle.FixedSingle;
+            this.Controls.Add(pic);
 
             // CheckBoxes
-            chkOpacity = new CheckBox();
-            chkOpacity.Text = "Vormi läbipaistvus";
-            chkOpacity.Location = new Point(220, 50);
-            chkOpacity.Size = new Size(150, 25);
-            chkOpacity.CheckedChanged += ChkOpacity_CheckedChanged;
-            this.Controls.Add(chkOpacity);
+            cb1 = new CheckBox();
+            cb1.Text = "Vormi läbipaistvus";
+            cb1.Location = new Point(220, 50);
+            cb1.Size = new Size(150, 25);
+            cb1.CheckedChanged += Cb1Click;
+            this.Controls.Add(cb1);
 
-            chkTopMost = new CheckBox();
-            chkTopMost.Text = "Kõige peal";
-            chkTopMost.Location = new Point(220, 80);
-            chkTopMost.Size = new Size(150, 25);
-            chkTopMost.CheckedChanged += ChkTopMost_CheckedChanged;
-            this.Controls.Add(chkTopMost);
+            cb2 = new CheckBox();
+            cb2.Text = "Kõige peal";
+            cb2.Location = new Point(220, 80);
+            cb2.Size = new Size(150, 25);
+            cb2.CheckedChanged += Cb2Click;
+            this.Controls.Add(cb2);
 
-            chkMaximized = new CheckBox();
-            chkMaximized.Text = "Suurenda aken";
-            chkMaximized.Location = new Point(220, 110);
-            chkMaximized.Size = new Size(150, 25);
-            chkMaximized.CheckedChanged += ChkMaximized_CheckedChanged;
-            this.Controls.Add(chkMaximized);
+            cb3 = new CheckBox();
+            cb3.Text = "Suurenda aken";
+            cb3.Location = new Point(220, 110);
+            cb3.Size = new Size(150, 25);
+            cb3.CheckedChanged += Cb3Click;
+            this.Controls.Add(cb3);
 
-            chkBorder = new CheckBox();
-            chkBorder.Text = "Näita piire";
-            chkBorder.Location = new Point(220, 140);
-            chkBorder.Size = new Size(150, 25);
-            chkBorder.Checked = true;
-            chkBorder.CheckedChanged += ChkBorder_CheckedChanged;
-            this.Controls.Add(chkBorder);
+            cb4 = new CheckBox();
+            cb4.Text = "Näita piire";
+            cb4.Location = new Point(220, 140);
+            cb4.Size = new Size(150, 25);
+            cb4.Checked = true;
+            cb4.CheckedChanged += Cb4Click;
+            this.Controls.Add(cb4);
 
             // RadioButtons
-            rbDark = new RadioButton();
-            rbDark.Text = "Tume teema";
-            rbDark.Location = new Point(400, 50);
-            rbDark.Size = new Size(120, 25);
-            rbDark.CheckedChanged += ThemeChanged;
-            this.Controls.Add(rbDark);
+            rb1 = new RadioButton();
+            rb1.Text = "Tume teema";
+            rb1.Location = new Point(400, 50);
+            rb1.Size = new Size(120, 25);
+            rb1.CheckedChanged += RbClick;
+            this.Controls.Add(rb1);
 
-            rbLight = new RadioButton();
-            rbLight.Text = "Hele teema";
-            rbLight.Location = new Point(400, 80);
-            rbLight.Size = new Size(120, 25);
-            rbLight.Checked = true;
-            rbLight.CheckedChanged += ThemeChanged;
-            this.Controls.Add(rbLight);
+            rb2 = new RadioButton();
+            rb2.Text = "Hele teema";
+            rb2.Location = new Point(400, 80);
+            rb2.Size = new Size(120, 25);
+            rb2.Checked = true;
+            rb2.CheckedChanged += RbClick;
+            this.Controls.Add(rb2);
 
-            tabControl = new TabControl();
-            tabControl.Location = new Point(30, 230);
-            tabControl.Size = new Size(450, 220);
+            tabs = new TabControl();
+            tabs.Location = new Point(30, 230);
+            tabs.Size = new Size(450, 220);
             
             TabPage tab1 = new TabPage("Kaart 1");
             Label lbl1 = new Label();
@@ -101,41 +101,56 @@ namespace FormElements
             
             TabPage tab2 = new TabPage("Kaart 2");
             
-            TextBox textBox = new TextBox();
-            textBox.Location = new Point(10, 10);
-            textBox.Size = new Size(200, 20);
-            textBox.Text = "Sisesta tekst siia";
+            TextBox tb = new TextBox();
+            tb.Location = new Point(10, 10);
+            tb.Size = new Size(200, 20);
+            tb.Text = "Sisesta tekst siia";
+            tb.ForeColor = Color.Gray;
+            tb.GotFocus += (s, e) => {
+                if (tb.Text == "Sisesta tekst siia")
+                {
+                    tb.Text = "";
+                    tb.ForeColor = Color.Black;
+                }
+            };
+            tb.LostFocus += (s, e) => {
+                if (string.IsNullOrWhiteSpace(tb.Text))
+                {
+                    tb.ForeColor = Color.Gray;
+                    tb.Text = "Sisesta tekst siia";
+                }
+            };
             
             Button btn2 = new Button();
             btn2.Text = "Näita teksti";
             btn2.Location = new Point(10, 40);
-            btn2.Click += (s, e) => MessageBox.Show($"Sisestatud tekst: {textBox.Text}");
+            btn2.Click += (s, e) => MessageBox.Show($"Sisestatud tekst: {tb.Text}");
             
             CheckBox chkTab2 = new CheckBox();
             chkTab2.Text = "Muuda kaardi värvi";
             chkTab2.Location = new Point(10, 70);
             chkTab2.CheckedChanged += (s, e) => tab2.BackColor = chkTab2.Checked ? Color.LightBlue : Color.White;
             
-            tab2.Controls.Add(textBox);
+            tab2.Controls.Add(tb);
             tab2.Controls.Add(btn2);
             tab2.Controls.Add(chkTab2);
             
             TabPage addTab = new TabPage("+");
             
-            tabControl.TabPages.Add(tab1);
-            tabControl.TabPages.Add(tab2);
-            tabControl.TabPages.Add(addTab);
-            tabControl.MouseDoubleClick += TabControl_MouseDoubleClick;
-            tabControl.MouseClick += TabControl_MouseClick;
-            this.Controls.Add(tabControl);
+            tabs.TabPages.Add(tab1);
+            tabs.TabPages.Add(tab2);
+            tabs.TabPages.Add(addTab);
+            tabs.MouseDoubleClick += TabDoubleClick;
+            tabs.MouseClick += TabClick;
+            this.Controls.Add(tabs);
 
             // ListBox
-            listBox = new ListBox();
-            listBox.Location = new Point(520, 230);
-            listBox.Size = new Size(150, 150);
-            listBox.Items.AddRange(new string[] { "Punane", "Roheline", "Sinine", "Kollane", "Violetne" });
-            listBox.SelectedIndexChanged += ListBox_SelectedIndexChanged;
-            this.Controls.Add(listBox);
+            list = new ListBox();
+            list.Location = new Point(520, 230);
+            list.Size = new Size(150, 150);
+            list.Items.AddRange(new string[] { "Punane", "Roheline", "Sinine", "Kollane", "Violetne" });
+            list.SelectedIndexChanged += ListClick;
+            this.Controls.Add(list);
             
             // Pealkirjad
             Label lblPicture = new Label();
@@ -171,58 +186,56 @@ namespace FormElements
             this.Controls.Add(lblTabInstructions);
         }
 
-        private void PictureBox_DoubleClick(object sender, EventArgs e)
+        private void PicClick(object sender, EventArgs e)
         {
-        
             if (Control.ModifierKeys == Keys.Control)
             {
                 currentImageIndex = random.Next(images.Length);
             }
             else
             {
-                
                 currentImageIndex = (currentImageIndex + 1) % images.Length;
             }
-            pictureBox.Image = Image.FromFile(@"..\..\Images\" + images[currentImageIndex]);
+            pic.Image = Image.FromFile(@"..\..\Images\" + images[currentImageIndex]);
         }
 
-        private void ChkOpacity_CheckedChanged(object sender, EventArgs e)
+        private void Cb1Click(object sender, EventArgs e)
         {
-            this.Opacity = chkOpacity.Checked ? 0.5 : 1.0;
+            this.Opacity = cb1.Checked ? 0.5 : 1.0;
         }
 
-        private void ChkTopMost_CheckedChanged(object sender, EventArgs e)
+        private void Cb2Click(object sender, EventArgs e)
         {
-            this.TopMost = chkTopMost.Checked;
+            this.TopMost = cb2.Checked;
         }
 
-        private void ChkMaximized_CheckedChanged(object sender, EventArgs e)
+        private void Cb3Click(object sender, EventArgs e)
         {
-            this.WindowState = chkMaximized.Checked ? FormWindowState.Maximized : FormWindowState.Normal;
+            this.WindowState = cb3.Checked ? FormWindowState.Maximized : FormWindowState.Normal;
         }
 
-        private void ChkBorder_CheckedChanged(object sender, EventArgs e)
+        private void Cb4Click(object sender, EventArgs e)
         {
-            this.FormBorderStyle = chkBorder.Checked ? FormBorderStyle.Sizable : FormBorderStyle.None;
+            this.FormBorderStyle = cb4.Checked ? FormBorderStyle.Sizable : FormBorderStyle.None;
         }
 
-        private void ThemeChanged(object sender, EventArgs e)
+        private void RbClick(object sender, EventArgs e)
         {
-            if (rbDark.Checked)
+            if (rb1.Checked)
             {
                 this.BackColor = Color.DarkGray;
                 this.ForeColor = Color.White;
             }
-            else if (rbLight.Checked)
+            else if (rb2.Checked)
             {
                 this.BackColor = Color.White;
                 this.ForeColor = Color.Black;
             }
         }
 
-        private void ListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListClick(object sender, EventArgs e)
         {
-            switch (listBox.SelectedIndex)
+            switch (list.SelectedIndex)
             {
                 case 0: this.BackColor = Color.LightCoral; break;
                 case 1: this.BackColor = Color.LightGreen; break;
@@ -232,35 +245,34 @@ namespace FormElements
             }
         }
 
-        private void TabControl_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void TabDoubleClick(object sender, MouseEventArgs e)
         {
-        
-            for (int i = 0; i < tabControl.TabPages.Count; i++)
+            for (int i = 0; i < tabs.TabPages.Count; i++)
             {
-                if (tabControl.GetTabRect(i).Contains(e.Location) && tabControl.TabPages[i].Text == "+")
+                if (tabs.GetTabRect(i).Contains(e.Location) && tabs.TabPages[i].Text == "+")
                 {
-                    TabPage newTab = new TabPage($"Kaart {tabControl.TabPages.Count}");
+                    TabPage newTab = new TabPage($"Kaart {tabs.TabPages.Count}");
                     Label newLabel = new Label();
-                    newLabel.Text = $"Uus kaart {tabControl.TabPages.Count}";
+                    newLabel.Text = $"Uus kaart {tabs.TabPages.Count}";
                     newLabel.Location = new Point(10, 10);
                     newTab.Controls.Add(newLabel);
-                    tabControl.TabPages.Insert(tabControl.TabPages.Count - 1, newTab);
+                    tabs.TabPages.Insert(tabs.TabPages.Count - 1, newTab);
                     break;
                 }
             }
         }
 
-        private void TabControl_MouseClick(object sender, MouseEventArgs e)
+        private void TabClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                for (int i = 0; i < tabControl.TabPages.Count - 1; i++)
+                for (int i = 0; i < tabs.TabPages.Count - 1; i++)
                 {
-                    if (tabControl.GetTabRect(i).Contains(e.Location))
+                    if (tabs.GetTabRect(i).Contains(e.Location))
                     {
-                        if (tabControl.TabPages.Count > 3)
+                        if (tabs.TabPages.Count > 3)
                         {
-                            tabControl.TabPages.RemoveAt(i);
+                            tabs.TabPages.RemoveAt(i);
                         }
                         break;
                     }
@@ -273,12 +285,12 @@ namespace FormElements
             MenuStrip menuStrip = new MenuStrip();
             
             ToolStripMenuItem fileMenu = new ToolStripMenuItem("Fail");
-            fileMenu.DropDownItems.Add("Näita dialoogi", null, ShowCustomDialog);
+            fileMenu.DropDownItems.Add("Näita dialoogi", null, ShowDialog);
             fileMenu.DropDownItems.Add("Välju", null, (s, e) => this.Close());
             
             ToolStripMenuItem viewMenu = new ToolStripMenuItem("Vaade");
-            viewMenu.DropDownItems.Add("Lähtesta pilt", null, ResetImage);
-            viewMenu.DropDownItems.Add("Tühista valik", null, ClearSelection);
+            viewMenu.DropDownItems.Add("Lähtesta pilt", null, ResetPic);
+            viewMenu.DropDownItems.Add("Tühista valik", null, ClearAll);
             
             menuStrip.Items.Add(fileMenu);
             menuStrip.Items.Add(viewMenu);
@@ -286,7 +298,7 @@ namespace FormElements
             this.Controls.Add(menuStrip);
         }
 
-        private void ShowCustomDialog(object sender, EventArgs e)
+        private void ShowDialog(object sender, EventArgs e)
         {
             Form dialog = new Form();
             dialog.Text = "Dialoogiaken";
@@ -308,32 +320,27 @@ namespace FormElements
             dialog.ShowDialog();
         }
 
-        private void ResetImage(object sender, EventArgs e)
+        private void ResetPic(object sender, EventArgs e)
         {
             currentImageIndex = 0;
-            pictureBox.Image = Image.FromFile(@"..\..\Images\" + images[0]);
+            pic.Image = Image.FromFile(@"..\..\Images\" + images[0]);
         }
 
-        private void ClearSelection(object sender, EventArgs e)
+        private void ClearAll(object sender, EventArgs e)
         {
-      
-            listBox.ClearSelected();
+            list.ClearSelected();
             
-          
-            chkOpacity.Checked = false;
-            chkTopMost.Checked = false;
-            chkMaximized.Checked = false;
-            chkBorder.Checked = true;
+            cb1.Checked = false;
+            cb2.Checked = false;
+            cb3.Checked = false;
+            cb4.Checked = true;
             
-          
-            rbLight.Checked = true;
+            rb2.Checked = true;
             
-           
             currentImageIndex = 0;
-            pictureBox.Image = Image.FromFile(@"..\..\Images\" + images[0]);
+            pic.Image = Image.FromFile(@"..\..\Images\" + images[0]);
             
-            
-            foreach (TabPage tab in tabControl.TabPages)
+            foreach (TabPage tab in tabs.TabPages)
             {
                 if (tab.Text != "+")
                 {
@@ -356,7 +363,5 @@ namespace FormElements
   
             this.BackColor = Color.White;
         }
-
-
     }
 }
