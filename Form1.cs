@@ -45,6 +45,7 @@ namespace FormElements
             tn.Nodes.Add(new TreeNode("ListBox")); 
             tn.Nodes.Add(new TreeNode("DataGridView"));
             tn.Nodes.Add(new TreeNode("MainMenu"));
+            tn.Nodes.Add(new TreeNode("Form2"));
             //nupp
             btn = new Button();
             btn.Text = "Vajuta siia";
@@ -228,6 +229,11 @@ namespace FormElements
                 menu.MenuItems.Add(menuFile);
                 this.Menu = menu;
                 //
+            }
+            else if (e.Node.Text == "Form2")
+            {
+                Form2 form2 = new Form2();
+                form2.Show();
             }
         }
 
